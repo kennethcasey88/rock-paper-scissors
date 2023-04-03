@@ -1,43 +1,56 @@
-let randoVal = Math.floor(Math.random() * 3) + 1;
-let cpu;
-let winner;
-let loser;
-getComputerChoice();
-function getComputerChoice() {
-    if (randoVal === 2) {
-        cpu = "paper";
-        return cpu;
+let i;
+let playerChoice;
+let results = 0;
+let final = 0;
+function cpuFunc(cpuChoice) {
+    let randoVal = Math.floor(Math.random() * 3) + 1;
+    if (randoVal === 1) {
+        cpuChoice = "rock";
+        return cpuChoice;
+    } else if (randoVal === 2) {
+        cpuChoice = "paper";
+        return cpuChoice;
     } else if (randoVal === 3) {
-        cpu = "scissors";
-        return cpu;
-    } else  {
-       cpu = "rock";
-       return cpu;
+        cpuChoice = "scissors";
+        return cpuChoice;
     }
 }
-let cpuChoice = getComputerChoice();
-let player = prompt("Rock, Paper or Scissors?");
+function game() {
+for (i = 0; i < 5; i++) {
+playerChoice = prompt("Game begins!").toLowerCase();
+let cpuRoll = cpuFunc();
+cpuFunc();
+results = rounds(playerChoice, cpuRoll);
 
-let lower = player.toLowerCase();
-console.log(lower);
-    console.log(cpuChoice);
-playRound(lower, cpuChoice);
-function playRound(player, cpu) {
-    console.log(player);
-    console.log(getComputerChoice());
+final += results;
+
+}
+if (final > 0) {
+    console.log("You win");
+} else if (final < 0) {
+    console.log("You suck loser") 
+} else {
+    console.log("Tie game")
+}
+}
+
+function rounds(player, cpu) {
+    let result;
     if ((player === "rock") && (cpu === "paper")) {
         alert("You lose! Paper beats Rock");
-        return loser;
+        return result = -1;
     } else if ((player === "scissors") && (cpu === "rock")) {
         alert("You lose! Rock beats Scissors");
-        return loser;
+        return result = -1;
     } else if ((player === "paper") && (cpu === "scissors")) {
         alert("You lose! Scissors beats Paper");
-        return loser;
+        return result = -1;
     } else if (player === cpu) {
         alert("Tie game");
+        return result = 0;
     }     else {
         alert("You win!");
-        return winner;
+        return result = 1;
     }
 }
+game();
